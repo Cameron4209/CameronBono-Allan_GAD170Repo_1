@@ -1,96 +1,97 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class XPSystem : MonoBehaviour
 {
-    public int level = 0; //laps
+    int level = 0;
+    float curXP = 0.0f;
+    float reqXP = 100.0f;
+    float health = 100;
+    float defence = 10;
+    float speed = 10;
+    float attack = 10;
 
-    public float curXP = 0.0f; //curLapProgress
-    public float reqXP = 100.0f; //reqLapProgress
-
-    //stats to betracked and updated upon levelup
-    public float health = 100;
-    public float defence = 10;
-    public float speed = 10;
-    public float attack = 10;
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //skeletons need to go in here
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        //Keyboard Inputs
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            InteractionAttack();
+            GainXP(10.0f);
         }
-        if (Input.GetKeyDown(KeyCode.E));
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            InteractionSkill();
+            GainXP(15.0f);
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            InteractionUltimate();
+            GainXP(50.0f);
         }
         else
         {
-            Debug.Log("Please activate a valid attack option, either 'Left Mouse Click', 'E' or 'Q'.");
-        }
-
-        //Increase level
-        public void LevelUp()
-        {
-            level += 1;
-            InitialStats();
-        }
-
-
-        public void InitialStats()
-        {
-            //Initial stats, level. xp, reqxp etc.
-            //Increasing level by 1, resetting current XP to 0 & Increasing required XP by 20%.
-            curXP = 0.0f;
-            reqXP *= 1.2f;
-            Debug.Log("Congratulations, you have leveled up. Your new level is " + level + ".");
-        }
-
-        public void InteractionAttack(int exp)
-        {
-            //an interaction called by a buttn press x3
-            curXP + 10.0f;
-            Debug.Log("Performed Normal Attack. Gained 10 XP.");
-        }
-        
-        public void InteractionSkill(int exp)
-        {
-            //an interaction called by a buttn press x3
-            curXP + 20.0f;
-            Debug.Log("Performed Skill Attack. Gained 20 XP.");
-        }
-
-        public void InteractionUltimate(int exp)
-        {
-            //an interaction called by a buttn press x3
-            curXP + 50.0f;
-            Debug.Log("Performed Ultimate Attack. Gained 50 XP.");
-        }
-
-        public void GainXP(int amount)
-        {
-            //increase current xp
-
-        }
-
-        public void IncreaseStats()
-        {
-            //increase our stats
+            //Debug.Log("Please perform a valid action using the inputs: 'E', 'R' or 'Q'.");
         }
 
     }
 
-}*/
+    //functions:
+    //Give x ammount of xp when a valid input occurs.
+    public void GainXP(float XP)
+    {
+        curXP += XP;
+        Debug.Log("Gained " + XP + " XP.");
+        Debug.Log("Your current XP is " + curXP + ".");
+        CheckXP();
+    }
+
+    //checks if ammount of xp is equal to or exceeds the ammount of required xp, if it is, level up.
+    public void CheckXP()
+    {
+        if (curXP >= reqXP)
+        {
+            LevelUp();
+            Debug.Log("Your attack was successful.");
+            Debug.Log("Congratulations, you have leveled up. Your new level is " + level + ". Your new stats are as follows:");
+            Debug.Log("Health = " + health + ".");
+            Debug.Log("Defence = " + defence + ".");
+            Debug.Log("Speed = " + speed + ".");
+            Debug.Log("Base Attack = " + attack + ".");
+        }
+        else
+        {
+            Debug.Log("Your attack was successful.");
+        }
+
+    }
+
+    //Leads the code to two more functions which make up the entire levle up function.
+    public void LevelUp()
+    {
+        //level += 1; //in racing script there were two 'laps +=1', if I did that here wouldnt it give 2 levels rather than 1?
+        InitializeStats();
+        UpgradeStats();
+    }
+
+    //Increases level by 1, curXP reverted to 0 and reqXP is 20% larger.
+    public void InitializeStats()
+    {
+        level += 1;
+        curXP = 0.0f;
+        reqXP *= 1.2f;
+    }
+
+    //Increases health by 20%, defence by 5, speed by 5, and attack by 5.
+    public void UpgradeStats()
+    {
+        health *= 1.2f;
+        defence += 5;
+        speed += 5;
+        attack += 5;
+    }
+    
+}
