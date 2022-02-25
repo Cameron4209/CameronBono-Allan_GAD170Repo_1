@@ -34,12 +34,13 @@ public class XPSystem_1 : MonoBehaviour
         }
         else
         {
-            Debug.Log("Please perform a valid action using the inputs: 'E', 'R' or 'Q'.");
+            //Debug.Log("Please perform a valid action using the inputs: 'E', 'R' or 'Q'.");
         }
 
     }
 
     //functions:
+    //Give x ammount of xp when a valid input occurs.
     public void GainXP(float XP)
     {
         curXP += XP;
@@ -48,13 +49,14 @@ public class XPSystem_1 : MonoBehaviour
         CheckXP();
     }
 
+    //checks if ammount of xp is equal to or exceeds the ammount of required xp, if it is, level up.
     public void CheckXP()
     {
         if (curXP >= reqXP)
         {
             LevelUp();
             Debug.Log("Your attack was successful.");
-                Debug.Log("Congratulations, you have leveled up. Your new level is " + level + ". Your new stats are as follows:");
+            Debug.Log("Congratulations, you have leveled up. Your new level is " + level + ". Your new stats are as follows:");
             Debug.Log("Health = " + health + ".");
             Debug.Log("Defence = " + defence + ".");
             Debug.Log("Speed = " + speed + ".");
@@ -67,13 +69,15 @@ public class XPSystem_1 : MonoBehaviour
 
     }
 
+    //Leads the code to two more functions which make up the entire levle up function.
     public void LevelUp()
     {
-        //level += 1; in racing script there were two 'laps +=1', if I did that here wouldnt it give 2 levels rather than 1?
+        //level += 1; //in racing script there were two 'laps +=1', if I did that here wouldnt it give 2 levels rather than 1?
         InitializeStats();
         UpgradeStats();
     }
 
+    //Increases level by 1, curXP reverted to 0 and reqXP is 20% larger.
     public void InitializeStats()
     {
         level += 1;
@@ -81,6 +85,7 @@ public class XPSystem_1 : MonoBehaviour
         reqXP *= 1.2f;
     }
 
+    //Increases health by 20%, defence by 5, speed by 5, and attack by 5.
     public void UpgradeStats()
     {
         health *= 1.2f;
