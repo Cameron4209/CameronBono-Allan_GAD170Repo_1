@@ -44,8 +44,7 @@ public class XPSystem : MonoBehaviour
     public void GainXP(float XP)
     {
         curXP += XP;
-        Debug.Log("Gained " + XP + " XP.");
-        Debug.Log("Your current XP is " + curXP + ".");
+        Debug.Log("Your attack was successful. Gained " + XP + " XP. Your current XP is " + curXP + ".");
         CheckXP();
     }
 
@@ -55,16 +54,11 @@ public class XPSystem : MonoBehaviour
         if (curXP >= reqXP)
         {
             LevelUp();
-            Debug.Log("Your attack was successful.");
-            Debug.Log("Congratulations, you have leveled up. Your new level is " + level + ". Your new stats are as follows:");
-            Debug.Log("Health = " + health + ".");
-            Debug.Log("Defence = " + defence + ".");
-            Debug.Log("Speed = " + speed + ".");
-            Debug.Log("Base Attack = " + attack + ".");
+            Debug.Log("Your attack was successful. Congratulations, you have leveled up. Your new level is " + level + ". Your new stats are as follows: Health = " + health + ", Defence = " + defence + ", Speed = " + speed + ", Base Attack = " + attack + ".");
         }
         else
         {
-            Debug.Log("Your attack was successful.");
+
         }
 
     }
@@ -93,5 +87,5 @@ public class XPSystem : MonoBehaviour
         speed += 5;
         attack += 5;
     }
-    
+
 }
